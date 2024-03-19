@@ -1,0 +1,17 @@
+{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+    {{ form_widget(form) }}
+    <div>
+        <label for=""> Image principale </label>
+        <input type="file" class="form-control" name="produit_file" id="fileInput" onchange="previewImage(this)" >
+    </div>
+
+    <div>
+        <label for=""> détail </label>
+        <input type="file" id="fileInput2" name="detailsProduit[]" multiple class="form-control" >
+    </div>
+
+<input type="hidden" id="removedFiles" name="removedFiles">
+
+
+<button class="btn btn-primary mt-2 btn-sm " data-bs-toggle="tooltip" data-bs-placement="top" title="supprimer" >{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

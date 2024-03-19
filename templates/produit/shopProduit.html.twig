@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}panier{% endblock %}
+
+{% block body %}
+    <main>
+
+        <!-- breadcrumb-area-start -->
+        <div class="breadcrumb__area pt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tp-breadcrumb__content">
+                            <div class="tp-breadcrumb__list">
+                                <span class="tp-breadcrumb__active"><a href="{{ path('app_home')}}">Home</a></span>
+                                <span class="dvdr">/</span>
+                                <span>Cart</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb-area-end -->
+
+
+        {% include 'plusInfo.html.twig' %}
+
+    </main>
+
+{% endblock %}
+
+{%block js %}
+    <script src="{{asset('afficherPanier.js')}}"></script>
+{%endblock%}

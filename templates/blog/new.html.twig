@@ -1,0 +1,13 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}New Blog{% endblock %}
+
+{% block body %}
+    <div class="card p-4">
+        <div class="card-body">
+            <h4>Create new Blog</h4>
+
+            {{ include('blog/_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

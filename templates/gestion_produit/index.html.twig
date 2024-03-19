@@ -1,0 +1,103 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+{% block body %}
+    <h5>Liste des produit</h5>
+    <a class="btn btn-primary"  href="{{ path('app_gestion_produit_new') }}">Ajouter produit</a>
+    <div class="row mt-2 ">
+        {% for produit in produits %}
+            {% set words = produit.description|split(' ') %}
+            {% set limitedWords = words|slice(0,10)|join(' ') %}
+                <div class="col-md-4 col-xl-2 " >
+                    <div class="card">
+                        <img class="card-img-top img-fluid"  height="200" src="{{asset('produit/')}}{{produit.ficher}}" alt="Card image cap" >
+                        <div class="card-body">
+                            <h4 class="card-title">{{ produit.nom }}
+                                {% if produit.speciale == true %}
+                                    <br>
+                                    <span style="color: yellow" >spéciale</span>
+                                {% endif %}
+                                {% if produit.isvedette == true %}
+                                    <br>
+                                    <span style="color: blue" >vedette</span>
+                                {% endif %}
+                                {% if produit.lier != null %}
+                                    <br>
+                                    <span style="color: blue" > lier slider {{ produit.lier }}</span>
+                                {% endif %}
+                            </h4>
+                            <h4 class="card-title">Prix: {{ produit.prix }} €</h4>
+                            <p class="card-text">{{ limitedWords }}...</p>
+                            <div class="d-flex flex-row" >
+                                {{ include('gestion_produit/_delete_form.html.twig') }}
+                                <a href="{{ path('app_gestion_produit_edit', {'id': produit.id}) }}" class="btn btn-sm btn-info ms-2 me-2 waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" title=" modifier" ><i class="fas fa-pen" ></i></a>
+                                <form method="post">
+                                    <input type="hidden" value="{{ produit.id }}" name="produit-id" >
+                                    <button type="submit" class="btn btn-warning btn-sm " name="btn-speciale" data-bs-toggle="tooltip" data-bs-placement="top" title="spéciale" ><i class="fas fa-gift"></i></button>
+                                </form>
+                                <form method="post" class="ms-2 me-2">
+                                    <input type="hidden" value="{{ produit.id }}" name="produit-id-vedette" >
+                                    <button type="submit" class="btn btn-warning btn-sm " name="btn-vedette" data-bs-toggle="tooltip" data-bs-placement="top" title="vedette" ><i class="fas fa-fire"></i></button>
+                                </form>
+                                    <button  data-id="{{ produit.id }}" class="btn btn-warning btn-sm lier "  data-bs-toggle="tooltip" data-bs-placement="top" title="lier produit" ><i class="fas fa-link"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+
+    <div  class="navigation mt-2 d-flex justify-content-center">
+        {{ knp_pagination_render(produits) }}
+    </div>
+
+    <div class="modal" id="modalParametre" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Liée produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" >
+                        <form action="" method="post">
+                            <div>
+                                <input type="hidden" id="id-produit-lier" name="id-produit-lier" >
+                            </div>
+                            <div>
+                                <select name="slieder-lier" id="" class="form-select">
+                                    <option value="1">Slider 1</option>
+                                    <option value="2">Slider 2</option>
+                                    <option value="3">Slider 3</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex mt-2">
+                                <button type="submit" name="btn-lier-produit" class="btn btn-primary">Enregistré</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+
+        $('.lier').on('click',function () {
+
+            $('#modalParametre').modal('show')
+            var param = $(this).attr('data-id')
+            $('#id-produit-lier').val(param)
+        })
+
+
+    </script>
+
+{% endblock %}

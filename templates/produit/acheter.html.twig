@@ -1,0 +1,198 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acheter{% endblock %}
+
+{% block body %}
+
+
+    <main>
+
+        <!-- breadcrumb-area-start -->
+        <div class="breadcrumb__area pt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tp-breadcrumb__content">
+                            <div class="tp-breadcrumb__list">
+                                <span class="tp-breadcrumb__active"><a href="{{ path('app_home')}}">Home</a></span>
+                                <span class="dvdr">/</span>
+                                <span>Checkout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb-area-end -->
+
+        <!-- coupon-area start -->
+        <section class="coupon-area pt-10 pb-30">
+            <div class="container">
+{#                <div class="row">#}
+{#                    <div class="col-md-12">#}
+{#                        <div class="coupon-accordion">#}
+{#                            <!-- ACCORDION START -->#}
+{#                            <h3>Vous avez déja un compte? <span id="showlogin"> <a href="{{ path('app_login')}}">connexion</a> </span></h3>#}
+{#                        </div>#}
+{#                    </div>#}
+
+{#                </div>#}
+           </div>
+        </section>
+        <!-- coupon-area end -->
+
+        <!-- checkout-area start -->
+        <section class="checkout-area pb-50">
+            <div class="container">
+                <form  method="post" >
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="checkbox-form">
+                                <h3>Billing Details</h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="country-select">
+                                            <label>Pays <span class="required">*</span></label>
+                                            <select name="pays" required >
+                                                <option value="volvo">United States</option>
+                                                <option value="saab">Algeria</option>
+                                                <option value="mercedes">Canada</option>
+                                                <option value="audi">Germany</option>
+                                                <option value="audi2">England</option>
+                                                <option value="audi3">Qatar</option>
+                                                <option value="audi5">Dominican Republic</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Nom <span class="required">*</span></label>
+                                            <input type="text" placeholder="" name="username" required >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Prénom <span class="required">*</span></label>
+                                            <input type="text" placeholder="" required name="prenom" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Nom de société</label>
+                                            <input type="text" placeholder="" required  >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Address <span class="required">*</span></label>
+                                            <input type="text" placeholder="votre adresse" name="adresse" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Ville <span class="required">*</span></label>
+                                            <input type="text" placeholder="Town / City" name="ville" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Code postale <span class="required">*</span></label>
+                                            <input type="text" placeholder="code postale" name="codepostale" required >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Email Address <span class="required">*</span></label>
+                                            <input type="email" placeholder="" required name="email" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Téléphone <span class="required">*</span></label>
+                                            <input type="text" name="phone" required >
+                                        </div>
+                                    </div>
+
+
+                                    <input type="hidden" name="panier" id="panier" >
+
+                                    <input type="hidden" name="type-paiement-select" id="type-paiement-select" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="your-order mb-30 ">
+                                <h3>Your order</h3>
+                                <div class="your-order-table table-responsive">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-total">Total(€)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for item in panier %}
+
+                                        <tr class="cart_item">
+                                            <td class="product-name">
+                                              {{ item.nom }}   <strong class="product-quantity"> ×  {{ item.quantite }}</strong>
+                                            </td>
+                                            <td class="product-total">
+                                                <span class="amount">{{ item.prix |strings_float * item.quantite|strings_float  }} </span>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                        <tfoot>
+                                        <tr class="cart-subtotal">
+                                            <th>total</th>
+                                            <td><strong><span class="amount">{{ montantTotal }} €</span></strong></td>
+                                        </tr>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="payment-method">
+{#                                    <div class="accordion" id="checkoutAccordion">#}
+{#                                        <div class="accordion-item">#}
+{#                                            <h6 class="mb-4" >Type de paiement</h6>#}
+{#                                            <div class="check-box">#}
+{#                                                <input type="checkbox" name="paiement-type" value="Virement bancaire" checked id="type-2">#}
+{#                                                <label for="type-2">Virement bancaire.</label>#}
+{#                                            </div>#}
+{#                                            <div class="check-box">#}
+{#                                                <input type="checkbox" name="paiement-type" value="Cryptomonnaie" id="type-1">#}
+{#                                                <label for="type-1">Cryptomonnaie.</label>#}
+{#                                            </div>#}
+
+{#                                            <div>#}
+{#                                                <p id="error" class="text-danger"></p>#}
+{#                                            </div>#}
+
+{#                                        </div>#}
+
+{#                                    </div>#}
+                                    <div class="order-button-payment mt-20">
+                                        <button type="submit" name="commander"  class="tp-btn tp-color-btn w-100 banner-animation" id="proceder-au-paiement" >Commander</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- checkout-area end -->
+
+
+        {% include 'plusInfo.html.twig' %}
+
+    </main>
+
+{% endblock %}
+{%block js %}
+    <script src="{{asset('afficherPanier.js')}}"></script>
+{%endblock%}

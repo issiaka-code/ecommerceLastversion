@@ -1,0 +1,168 @@
+<aside id="sidebarContent1" class="u-sidebar u-sidebar--left" aria-labelledby="sidebarNavToggler1"> <div class="u-sidebar__scroller">
+				<div class="u-sidebar__container">
+					<div
+						class="">
+						<!-- Toggle Button -->
+						<div class="d-flex align-items-center pt-3 px-4 bg-white">
+							<button type="button" class="close ml-auto" aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1" data-unfold-type="css-animation" data-unfold-animation-in="fadeInLeft" data-unfold-animation-out="fadeOutLeft" data-unfold-duration="500">
+								<span aria-hidden="true">
+									<i class="ec ec-close-remove"></i>
+								</span>
+							</button>
+						</div>
+						<!-- End Toggle Button -->
+
+						<!-- Content -->
+						<div class="js-scrollbar u-sidebar__body">
+							<div class="u-sidebar__content u-header-sidebar__content px-4">
+								<div
+									class="mb-6 border border-width-2 border-color-3 borders-radius-6">
+									<!-- List -->
+									<ul id="sidebarNav" class="list-unstyled mb-0 sidebar-navbar view-all">
+
+										
+										<li>
+									<div class="dropdown-title">Liste des catégories</div>
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:2,cat:'ordinateur'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav1Collapse" data-target="#sidebarNav1Collapse">
+										Ordinateurs Portables<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:10,cat:'Gadgets electroniques'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav2Collapse" data-target="#sidebarNav2Collapse">
+										Gadgets electroniques<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:8,cat:'consoles de jeux'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav3Collapse" data-target="#sidebarNav3Collapse">
+										Consoles de jeux<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:3,cat:'TV'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav4Collapse" data-target="#sidebarNav4Collapse">
+										TV
+										<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:2,cat:'ordinateur'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav5Collapse" data-target="#sidebarNav5Collapse">
+										Drone
+										<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:6,cat:'Photos & video'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav6Collapse" data-target="#sidebarNav6Collapse">
+										Photos & video
+										<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:11,cat:'Meubles'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav7Collapse" data-target="#sidebarNav7Collapse">
+										Meubles
+										<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:4,cat:'Smartphones'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav8Collapse" data-target="#sidebarNav8Collapse">
+										Smartphones
+										<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:14,cat:'Poupees sexuelles'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav9Collapse" data-target="#sidebarNav9Collapse">
+										Poupees sexuelles
+										<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:5,cat:'Electromenagers'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav10Collapse" data-target="#sidebarNav10Collapse">
+										Electromenagers
+										<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+								<li>
+									<a class="dropdown-toggle dropdown-toggle-collapse" href="{{ path('app_produit',{id:1,cat:'Voiture'}) }}" role="button" aria-expanded="false" aria-controls="sidebarNav10Collapse" data-target="#sidebarNav10Collapse">
+										Voiture
+										<span class="text-gray-25 font-size-12 font-weight-normal"></span>
+									</a>
+
+
+								</li>
+										
+										
+									</ul>
+									<!-- End List -->
+								</div>
+								
+								<div class="mb-6">
+									<div class="border-bottom border-color-1 mb-5">
+										<h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Top produits</h3>
+									</div>
+									<ul class="list-unstyled">
+								{% for item in top_vente %}
+
+									{% set image = item.Imageproduit | split(";") %}
+
+									{% set descriptions = item.Description |slice(0, 50) %}
+									<li class="mb-4">
+										<div class="row">
+											<div class="col-auto">
+												<a href="{{ path('app_detail',{id:item.id})}}" class="d-block width-75">
+													<img class="img-fluid" src="{{asset('produit/')}}{{image[0]}}" alt="Image Description">
+												</a>
+											</div>
+											<div class="col">
+
+												<h3 class="text-lh-1dot2 font-size-14 mb-0">
+													<a href="{{ path('app_detail',{id:item.id})}}">
+														{{item.Nomproduit}}
+													</a>
+												</h3>
+
+												<div class="text-warning text-ls-n2 font-size-16 mb-1" style="width: 80px;">
+													<small class="fas fa-star"></small>
+													<small class="fas fa-star"></small>
+													<small class="fas fa-star"></small>
+													<small class="fas fa-star"></small>
+													<small class="fas fa-star"></small>
+
+												</div>
+												<div class="font-weight-bold">
+
+													<ins class="font-size-15 text-red text-decoration-none d-block">{{item.Prixproduit}}
+														€</ins>
+												</div>
+											</div>
+										</div>
+									</li>
+								{% endfor %}
+							</ul>
+								</div>
+							</div>
+						</div>
+						<!-- End Content -->
+					</div>
+				</div>
+			</div>
+		</aside>

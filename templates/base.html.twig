@@ -3,15 +3,344 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/logo/favicon.png') }}">
+        <!-- CSS here -->
+        {% block css %}
 
-        {% block javascripts %}
-{% block importmap %}{{ importmap('app') }}{% endblock %}
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/swiper-bundle.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/spacing.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/meanmenu.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/icon-dukamarket.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/jquery-ui.css') }}">
+        <link rel="stylesheet" href="{{ asset('main.css') }}">
+        <link href="{{ asset('table.css') }}" rel="stylesheet" type="text/css" />
+        {% endblock %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <style>
+
+            .page-item.active .page-link {
+                background-color:green !important;
+                color: white !important;
+                border-color:green !important;
+            }
+
+            .page-item .page-link {
+                color: green !important;
+                border-width: 2px;
+                height: 40px !important;
+            }
+
+            .loader {
+                border: 6px solid #f3f3f3;
+                border-top: 6px solid #3498db;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                animation: spin 2s linear infinite;
+            }
+            .hidden{
+                display: none !important ;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+
+        </style>
+        {% block stylesheets %}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <!-- Scroll-top -->
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <i class="icon-chevrons-up"></i>
+    </button>
+    <!-- Scroll-top-end-->
+
+
+    <!-- header-area-start -->
+    <header>
+
+        <div id="header-sticky" class="header__main-area d-none d-xl-block">
+            <div class="container">
+                <div class="header__for-megamenu p-relative">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3">
+                            <div class="header__logo">
+                                <a href="{{ path('app_home')}}"><img src="{{asset('logo/')}}{{paramettre[6].type}}" alt="logo"></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 d-flex flex-row-reverse">
+                            <div class="header__menu main-menu ">
+                                <nav id="mobile-menu">
+                                    <ul>
+                                        <li>
+                                            <a href="{{ path('app_home')}}">Home</a>
+                                        </li>
+                                        <li class="" >
+                                            <a href="{{ path('app_shop',{categorie:0})}}">Shop</a>
+                                        </li>
+                                        <li><a href="mailto:{{paramettre[2].type}}">Contact Us</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-4  d-flex flex-row ">
+
+                                <div class="tpsearchbar__form">
+
+                                    {{ form_start(form, {'method': 'POST'}) }}
+
+                                    <input type="text" name="recherche" class="form-control"  >
+                                    <button type="submit" class="tpsearchbar__search-btn"><i class="icon-search"></i></button>
+                                    {{ form_end(form) }}
+
+                                </div>
+                            <div class="header__info d-flex align-items-center">
+                                <div class="header__info-user tpcolor__yellow ml-10">
+                                    <a href="{{ path('app_login')}}"><i class="icon-user"></i></a>
+                                </div>
+                                <div class="header__info-cart tpcolor__oasis ml-10 tp-cart-toggle">
+                                    <a href="{{ path('app_panier')}}" ><i><img src="{{asset('assets/img/icon/cart-1.svg')}}" alt=""></i>
+                                        <span class="total-cart" >0</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- mobile-menu-area -->
+        <div id="header-sticky-2" class="tpmobile-menu d-xl-none">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-4 col-3 col-sm-3">
+                        <div class="mobile-menu-icon">
+                            <button class="tp-menu-toggle"><i class="icon-menu1"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-6 col-sm-4">
+                        <div class="header__logo text-center">
+                            <a href="{{ path('app_home')}}"><img src="{{asset('logo/')}}{{paramettre[6].type}}" alt="logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-3 col-sm-5">
+                        <div class="header__info d-flex align-items-center">
+                            <div class="header__info-search tpcolor__purple ml-10 d-none d-sm-block">
+                                <button class="tp-search-toggle"><i class="icon-search"></i></button>
+                            </div>
+                            <div class="header__info-user tpcolor__yellow ml-10 d-none d-sm-block">
+                                <a href="{{ path('app_login')}}"><i class="icon-user"></i></a>
+                            </div>
+                            <div class="header__info-cart tpcolor__oasis ml-10 tp-cart-toggle">
+                                <a href="{{ path('app_panier')}}" ><i><img src="{{asset('assets/img/icon/cart-1.svg')}}" alt=""></i>
+                                    <span class="total-cart" >0</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="body-overlay"></div>
+        <!-- mobile-menu-area-end -->
+
+        <!-- sidebar-menu-area -->
+        <div class="tpsideinfo">
+            <button class="tpsideinfo__close">Close<i class="fal fa-times ml-10"></i></button>
+            <div class="tpsideinfo__search text-center pt-35">
+                <span class="tpsideinfo__search-title mb-20">Recherche</span>
+
+                <form method="post">
+                    <input type="text" name="rechercheMobile" class="form-control"  >
+                    <button type="submit" name="btn-search-moibil" ><i class="icon-search"></i></button>
+                </form>
+
+
+            </div>
+            <div class="tpsideinfo__nabtab">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Menu</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Categories</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                        <div class="tpsideinfo__account-link">
+                            <a href="{{ path('app_home')}}">Home</a>
+                        </div>
+                        <div class="tpsideinfo__account-link">
+                            <a href="{{ path('app_shop',{categorie:0})}}">Shop</a>
+                        </div>
+                        <div class="tpsideinfo__account-link">
+                            <a href="mailto:someone@example.com">Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                        <div class="tpsidebar-categories">
+                            <ul>
+                                {% for categorie  in categories %}
+                                <li><a href="{{ path('app_shop',{categorie:categorie.id})}}">{{categorie.Nomcategorie}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tpsideinfo__account-link">
+                <a href="{{ path('app_login')}}"><i class="icon-user icons"></i> Login / Register</a>
+            </div>
+        </div>
+        <!-- sidebar-menu-area-end -->
+      </header>
+
+    <div class="overlay hidden " style="background-color: #fff; opacity: 0.5; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999; display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh; pointer-events: none;">
+        <div class="loader"></div>
+    </div>
+        <!-- header-area-end -->
+
+            {% block body %}
+
+
+
+            {% endblock %}
+
+
+    <footer>
+        <div class="tpfooter__area theme-bg-2">
+            <div class="tpfooter__top pb-15">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="tpfooter__widget footer-col-1 mb-50">
+                                <h4 class="tpfooter__widget-title">Laissez-nous vous aider</h4>
+                                <p>Si vous avez des questions, s'il vous plaît<br>
+                                    Contactez-nous à:
+                                    <a href="mailto:{{paramettre[2].type}}">{{paramettre[2].type}}</a>
+                                </p>
+                                <div class="tpfooter__widget-social mt-45">
+                                    <span class="tpfooter__widget-social-title mb-5">Social Media:</span>
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-youtube"></i></a>
+                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                    <a href="#"><i class="fab fa-skype"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="tpfooter__widget footer-col-2 mb-50">
+                                <h4 class="tpfooter__widget-title">Adresse</h4>
+                                <p >{{paramettre[10].type}}</p>
+                                <div class="tpfooter__widget-time-info mt-35">
+                                    <span>Lundi – Vendredi : <b>8h10 – 2h10</b></span>
+                                    <span>Samedi : <b>8h10 – 18h10</b></span>
+                                    <span>Dimanche : <b>8Hh10 - 15h</b></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-5">
+                            <div class="tpfooter__widget footer-col-3 mb-50">
+                                <h4 class="tpfooter__widget-title">HOT CATEGORIES</h4>
+                                <div class="tpfooter__widget-links">
+                                    <ul>
+                                        <li> <a href="{{ path('app_shop',{categorie:categories[0].id})}}">{{categories[0].Nomcategorie}}</a></li>
+                                        <li> <a href="{{ path('app_shop',{categorie:categories[11].id})}}">{{categories[11].Nomcategorie}}</a></li>
+                                        <li> <a href="{{ path('app_shop',{categorie:categories[5].id})}}">{{categories[5].Nomcategorie}}</a></li>
+                                        <li> <a href="{{ path('app_shop',{categorie:categories[10].id})}}">{{categories[10].Nomcategorie}}</a></li>
+                                        <li> <a href="{{ path('app_shop',{categorie:categories[9].id})}}">{{categories[9].Nomcategorie}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-8 col-sm-7">
+                            <div class="tpfooter__widget footer-col-4 mb-50">
+                                <h4 class="tpfooter__widget-title">Notre newsletter</h4>
+                                <div class="tpfooter__widget-newsletter">
+                                    <p>Abonnez-vous à la liste de diffusion pour recevoir des mises à jour sur les nouveaux arrivants et d'autres informations.</p>
+                                    <form>
+                                        <span><i><img src="assets/img/shape/message-1.svg" alt=""></i></span>
+                                        <input type="email" placeholder="Your email address...">
+                                        <button class="tpfooter__widget-newsletter-submit tp-news-btn">Subscribe</button>
+                                    </form>
+                                    <div class="tpfooter__widget-newsletter-check mt-10">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                J'accepte les termes et conditions et la politique de confidentialité.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tpfooter___bottom pt-40 pb-40">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-7 col-sm-12">
+                            <div class="tpfooter__copyright">
+                                <span class="tpfooter__copyright-text">Copyright © {{paramettre[11].type}} .</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-5 col-sm-12">
+                            <div class="tpfooter__copyright-thumb text-end">
+                                <img src="assets/img/shape/footer-payment.png " alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {%block javascript1 %}
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/js/waypoints.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/swiper-bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/nice-select.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.js') }}"></script>
+    <script src="{{ asset('assets/js/magnific-popup.js') }}"></script>
+    <script src="{{ asset('assets/js/counterup.js') }}"></script>
+    <script src="{{ asset('assets/js/wow.js') }}"></script>
+    <script src="{{ asset('assets/js/isotope-pkgd.js') }}"></script>
+    <script src="{{ asset('assets/js/imagesloaded-pkgd.js') }}"></script>
+    <script src="{{ asset('assets/js/countdown.js') }}"></script>
+    <script src="{{ asset('assets/js/ajax-form.js') }}"></script>
+    <script src="{{ asset('assets/js/meanmenu.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <script src="{{asset('panier.js')}}"></script>
+    {%endblock%}
+
+    {%block js %}
+
+    {%endblock%}
     </body>
+
 </html>
+
+

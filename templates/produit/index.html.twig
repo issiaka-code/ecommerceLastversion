@@ -1,0 +1,438 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}home{% endblock %}
+
+{% block body %}
+    <main>
+        <section class="slider-area tpslider-delay">
+            <div class="swiper-container slider-active">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide ">
+                        <div class="tpslider pt-90 pb-0 grey-bg" data-background="assets/img/slider/shape-bg.jpg">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <div class="col-xxl-5 col-lg-6 col-md-6 col-12 col-sm-6">
+                                        <div class="tpslider__content pt-20">
+                                            <span class="tpslider__sub-title mb-35">Top Seller In The Week</span>
+                                            <h2 class="tpslider__title mb-30">{{ slider1.Nomproduit }}</h2>
+                                            <p>{{paramettre[7].type}}</p>
+                                            <div class="tpslider__btn">
+                                                <a class="tp-btn" href="{{ path('app_detail',{id:slider1.id})}}" >Shop Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-7 col-lg-6 col-md-6 col-12 col-sm-6">
+                                        <div class="tpslider__thumb p-relative pt-15">
+                                            <img class="tpslider__thumb-img" src="{{asset('silder/')}}{{paramettre[3].type}}" alt="slider-bg">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="tpslider pt-90 pb-0 grey-bg" data-background="assets/img/slider/shape-bg.jpg">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <div class="col-xxl-5 col-lg-6 col-md-6 col-sm-6">
+                                        <div class="tpslider__content pt-20">
+                                            <span class="tpslider__sub-title mb-35">Top Seller In The Week</span>
+                                            <h2 class="tpslider__title mb-30">{{ slider2.Nomproduit }} </h2>
+                                            <p>{{paramettre[7].type}}</p>
+                                            <div class="tpslider__btn">
+                                                <a class="tp-btn" href="{{ path('app_detail',{id:slider2.id})}}">Shop Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-7 col-lg-6  col-md-6 col-sm-6">
+                                        <div class="tpslider__thumb p-relative">
+                                            <img class="tpslider__thumb-img" src="{{asset('silder/')}}{{paramettre[4].type}}" alt="slider-bg">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="tpslider pt-90 pb-0 grey-bg" data-background="assets/img/slider/shape-bg.jpg">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <div class="col-xxl-5 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <div class="tpslider__content pt-20">
+                                            <span class="tpslider__sub-title mb-35">Top Seller In The Week</span>
+                                            <h2 class="tpslider__title mb-30">{{ slider3.Nomproduit }}</h2>
+                                            <p>{{paramettre[7].type}}</p>
+                                            <div class="tpslider__btn">
+                                                <a class="tp-btn" href="{{ path('app_detail',{id:slider3.id})}}">Shop Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="  col-xxl-7 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <div class="tpslider__thumb p-relative">
+                                            <img class="tpslider__thumb-img" src="{{asset('silder/')}}{{paramettre[5].type}}" alt="slider-bg">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tpslider__arrow d-none  d-xxl-block">
+                    <button class="tpsliderarrow tpslider__arrow-prv"><i class="icon-chevron-left"></i></button>
+                    <button class="tpsliderarrow tpslider__arrow-nxt"><i class="icon-chevron-right"></i></button>
+                </div>
+                <div class="slider-pagination d-xxl-none"></div>
+            </div>
+        </section>
+
+{#        <!-- slider-area-end -->#}
+
+        <!-- category-area-start -->
+        <section class="category-area grey-bg pb-40  ">
+            <div class="container">
+                <div class="swiper-container category-active">
+                    <div class="swiper-wrapper">
+                        {% for categorie  in categories %}
+                            <div class="swiper-slide">
+                                <div class="category__item mb-30">
+                                    <div class="category__thumb fix mb-15">
+                                        <a href="{{ path('app_shop',{categorie:categorie.id})}}"><img src="{{asset('pub12f.png') }}" alt="category-thumb"></a>
+                                    </div>
+                                    <div class="category__content">
+                                        <h5 class="category__title"><a href="">{{categorie.Nomcategorie}}</a></h5>
+                                        <span class="category__count"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- category-area-end -->
+
+        <!-- product-area-start -->
+        <section class="product-area grey-bg pb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="tpsection mb-35">
+                            <h4 class="tpsection__sub-title">~ Special Products ~</h4>
+                            <p>Explorez nos produits spéciaux, conçus pour ajouter une touche d'exception à votre quotidien.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tpproduct__arrow p-relative">
+                    <div class="swiper-container tpproduct-active tpslider-bottom p-relative">
+                        <div class="swiper-wrapper ">
+                            {% for produit in toproduit %}
+                                {% set image = produit.Imageproduit | split(";")  %}
+                                <div class="swiper-slide"   >
+                                    <div class=" tpproduct p-relative" >
+                                        <div class="tpproduct__thumb p-relative text-center">
+                                            <a href="{{ path('app_detail',{id:produit.id})}}"><img src="{{asset('produit/')}}{{image[0]}}" alt=""></a>
+                                            <a class="tpproduct__thumb-img" href="{{ path('app_detail',{id:produit.id})}}"><img src="{{asset('produit/')}}{{image[0]}}" alt=""></a>
+                                            <div class="tpproduct__info bage">
+                                                <span class="tpproduct__info-discount bage__discount">-50%</span>
+                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                            </div>
+                                            <div class="tpproduct__shopping">
+                                                <a class="tpproduct__shopping-wishlist" href="#"><i class="icon-heart icons"></i></a>
+                                                <a class="tpproduct__shopping-wishlist" href="#"><i class="icon-layers"></i></a>
+                                                <a class="tpproduct__shopping-cart" href="#"><i class="icon-eye"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="tpproduct__content">
+                                            <h4 class="tpproduct__title">
+                                                <a href="{{ path('app_detail',{id:produit.id})}}">{{produit.Nomproduit}}</a>
+                                            </h4>
+                                            <div class="tpproduct__rating mb-5">
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                            </div>
+                                            <div class="tpproduct__price">
+                                                <span>{{produit.Prixproduit}} €</span>
+                                            </div>
+                                            <div class="tpproduct__hover-btn d-flex justify-content-center mb-10 mt-2">
+                                                <button style="background-color: #96AE00; color: #ffff" class="btn cart  btn-sm" data_id='{{ produit.id }}'  >Ajouter</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tpproduct-btn">
+                        <div class="tpprduct-arrow tpproduct-btn__prv"><a href="#"><i class="icon-chevron-left"></i></a></div>
+                        <div class="tpprduct-arrow tpproduct-btn__nxt"><a href="#"><i class="icon-chevron-right"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product-area-end -->
+
+        <!-- product-feature-area-start -->
+        <section class="product-feature-area product-feature grey-bg pt-80 pb-40">
+            {% set image = vedette[0].Imageproduit | split(";")  %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="tpfeature__thumb p-relative pb-40">
+                            <img src="{{asset('produit/')}}{{image[0]}}" alt="" class="w-100" height="400" >
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="tpproduct-feature p-relative pt-45 pb-40">
+                            <div class="tpsection tpfeature__content mb-35">
+                                <h4 class="tpsection__sub-title mb-0">~ Le meilleur pour vous ~</h4>
+                                <h4 class="tpsection__title tpfeature__title mb-25">{{vedette[0].Nomproduit}}</h4>
+                                <p>{{ vedette[0].Description |slice(0, 200) }}</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="tpfeature__box">
+                                        <div class="tpfeature__product-item mb-25">
+                                            <h4 class="tpfeature__product-title">Prix: {{ vedette[0].Prixproduit }} €</h4>
+                                        </div>
+                                        <div class="d-flex flex-row justify-content-between" >
+                                            <div class="tpfeature__btn">
+                                                <button style="background-color: #96AE00; color: #ffff" class="btn cart  btn-sm" data_id='{{ vedette[0].id }}'>Ajouter</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product-feature-area-end -->
+
+        <!-- banner-area-start -->
+        <section class="banner-area pb-60 grey-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="tpbanner__item mb-30">
+                            <a href="{{ path('app_shop',{categorie:0})}}">
+                                <div class="tpbanner__content" data-background="a.png">
+                                    <span class="tpbanner__sub-title mb-10">Meilleures offres</span>
+                                    <h4 class="tpbanner__title mb-30">Visiter notre game de produit <br> en promotion  </h4>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="tpbanner__item mb-30">
+                            <a ><div class="tpbanner__content" data-background="e.png">
+                                    <span class="tpbanner__sub-title tpbanner__white mb-10">Livraison</span>
+                                    <h4 class="tpbanner__title mb-30">Nous assurons la livraison dans le monde entier.</h4>
+                                </div></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="tpbanner__item mb-30">
+                            <a >
+                                <div class="tpbanner__content" data-background="z.png">
+                                    <span class="tpbanner__sub-title mb-10">Service d'assistance</span>
+                                    <h4 class="tpbanner__title mb-30">Service d'assistance disponible 24/24 pour tous vos besoins.</h4>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- banner-area-end -->
+
+        <!-- product-area-start -->
+        <section class="weekly-product-area grey-bg pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="tpsection mb-20">
+                            <h4 class="tpsection__sub-title">~ Boutique ~</h4>
+                             <p>Découvrez une sélection variée de produits, alliant qualité et style pour répondre à toutes vos envies</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tpnavtab__area pb-40">
+                            <div class="row" >
+                                {% for produit in boutique %}
+                                    {% set image = produit.Imageproduit | split(";")  %}
+                                    <div class=" col-6 col-md-2 mt-2" >
+                                        <div class="tpproduct p-relative">
+                                            <div class="tpproduct__thumb p-relative text-center">
+                                                <a href="{{ path('app_detail',{id:produit.id})}}"><img src="{{asset('produit/')}}{{image[0]}}" alt=""></a>
+                                                <a class="tpproduct__thumb-img" href="{{ path('app_detail',{id:produit.id})}}"><img src="{{asset('produit/')}}{{image[0]}}" alt=""></a>
+                                                <div class="tpproduct__info bage">
+                                                    <span class="tpproduct__info-discount bage__discount">-50%</span>
+                                                    <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                </div>
+                                                <div class="tpproduct__shopping">
+                                                    <a class="tpproduct__shopping-wishlist" ><i class="icon-heart icons"></i></a>
+                                                    <a class="tpproduct__shopping-wishlist" href="#"><i class="icon-layers"></i></a>
+                                                    <a class="tpproduct__shopping-cart" href="#"><i class="icon-eye"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="tpproduct__content">
+                                                <h4 class="tpproduct__title">
+                                                    <a href="{{ path('app_detail',{id:produit.id})}}">{{produit.Nomproduit}}</a>
+                                                </h4>
+                                                <div class="tpproduct__rating mb-5">
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                </div>
+                                                <div class="tpproduct__price">
+                                                    <span>{{produit.Prixproduit}} €</span>
+
+                                                </div>
+
+                                                <div class="tpproduct__hover-btn d-flex justify-content-center mb-10 mt-2">
+                                                    <button style="background-color: #96AE00; color: #ffff" class="btn  btn-sm cart "   data_id='{{ produit.id }}' >Ajouter</button>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tpproduct__all-item text-center">
+                        <span>Découvrez des milliers d'autres produits de qualité.
+                           <a href="{{ path('app_shop',{categorie:0})}}">tous les produits <i class="icon-chevrons-right"></i></a>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product-area-end -->
+
+        <!-- product-coundown-area-start -->
+        <section class="product-coundown-area tpcoundown__bg grey-bg pb-25" data-background="pub.png">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tpcoundown p-relative ml-175">
+                            <div class="section__content mb-35">
+                                <span class="section__sub-title mb-10">~ Offres Spéciales ~</span>
+                                <h2 class="section__title mb-25">Produits de Qualité <br> à Prix Réduits</h2>
+                                <p>Découvrez nos offres spéciales du jour ! <br>
+                                    Profitez de tarifs exceptionnels sur une sélection de produits de qualité.</p>
+                            </div>
+
+                            <div class="tpcoundown__count">
+                                <h4 class="tpcoundown__count-title">hurry up! Offer End In:</h4>
+                                <div class="tpcoundown__countdown" data-countdown="2022/11/11"></div>
+                                <div class="tpcoundown__btn mt-50">
+                                    <a class="whight-btn" href="#divpromotion">Shop Now</a>
+                                    <a class="whight-btn border-btn ml-15" href="href="{{ path('app_shop',{categorie:0})}}"">View Menu</a>
+                                </div>
+                            </div>
+                            <div class="tpcoundown__shape d-none d-lg-block">
+                                <img class="tpcoundown__shape-one" src="{{ asset('assets/img/shape/tree-leaf-1.svg') }}" alt="">
+                                <img class="tpcoundown__shape-two" src="{{ asset('assets/img/shape/tree-leaf-2.svg') }}" alt="">
+                                <img class="tpcoundown__shape-three" src="{{ asset('assets/img/shape/tree-leaf-3.svg') }}" alt="">
+                                <img class="tpcoundown__shape-four" src="{{ asset('assets/img/shape/fresh-shape-1.svg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product-coundown-area-end -->
+
+        <!-- product-area-start -->
+        <section class="weekly-product-area grey-bg pb-70" id="divpromotion" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="tpsection mb-20">
+                            <h4 class="tpsection__sub-title">~ Promotion ~</h4>
+                            <p>Découvrez une sélection variée de produits, alliant qualité et style pour répondre à toutes vos envies</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="tpnavtab__area pb-40">
+                            <div class="row" >
+                                {% for produit in promotion %}
+                                    {% set image = produit.Imageproduit | split(";")  %}
+                                    <div class=" col-6 col-md-2 mt-2" >
+                                        <div class="tpproduct p-relative">
+                                            <div class="tpproduct__thumb p-relative text-center">
+                                                <a href="{{ path('app_detail',{id:produit.id})}}"><img src="{{asset('produit/')}}{{image[0]}}" alt=""></a>
+                                                <a class="tpproduct__thumb-img" href="{{ path('app_detail',{id:produit.id})}}"><img src="{{asset('produit/')}}{{image[0]}}" alt=""></a>
+                                                <div class="tpproduct__info bage">
+                                                    <span class="tpproduct__info-discount bage__discount">-50%</span>
+                                                    <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                </div>
+                                                <div class="tpproduct__shopping">
+                                                    <a class="tpproduct__shopping-wishlist" ><i class="icon-heart icons"></i></a>
+                                                    <a class="tpproduct__shopping-wishlist" href="#"><i class="icon-layers"></i></a>
+                                                    <a class="tpproduct__shopping-cart" href="#"><i class="icon-eye"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="tpproduct__content">
+                                                <h4 class="tpproduct__title">
+                                                    <a href="{{ path('app_detail',{id:produit.id})}}">{{produit.Nomproduit}}</a>
+                                                </h4>
+                                                <div class="tpproduct__rating mb-5">
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                </div>
+                                                <div class="tpproduct__price">
+                                                    <span>{{produit.Prixproduit}} €</span>
+
+                                                </div>
+
+                                                <div class="tpproduct__hover-btn d-flex justify-content-center mb-10 mt-2">
+                                                    <button style="background-color: #96AE00; color: #ffff" class="btn cart  btn-sm" data_id='{{ produit.id }}' >Ajouter</button>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- product-area-end -->
+        {% include 'plusInfo.html.twig' %}
+
+    </main>
+{% endblock %}

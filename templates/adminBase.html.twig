@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('assetss/images/favicon.ico') }}">
+
+    <!-- plugin css -->
+    <link href="{{ asset('assetss/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- preloader css -->
+    <link rel="stylesheet" href="{{ asset('assetss/css/preloader.min.css') }}" type="text/css" />
+
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('assetss/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{ asset('assetss/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assetss/css/table.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assetss/css/loader.css') }}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{{ asset('assetss/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    <style>
+        .required:after {
+            content:" *";
+            color: red;
+        }
+
+        .flag > div{
+            height: 5px;
+        }
+
+        .select2-container--bootstrap .select2-selection {
+            min-height: 38px;
+        }
+
+        .select2-selection__rendered {
+            margin: 2px;
+        }
+
+        .select2-selection__arrow {
+            margin: 2px;
+        }
+
+        #arrowDetail{
+            position: absolute;
+            top: 200px;
+            transform: translateY(-50%);
+            left: 0;
+            right:unset;
+            padding:5px ;
+            z-index: 3;
+            box-shadow: -1px 2px 2px 0px rgba(0,0,0,0.46);
+            -webkit-box-shadow: -1px 2px 2px 0px rgba(0,0,0,0.46);
+            -moz-box-shadow: -1px 2px 2px 0px rgba(0,0,0,0.46);
+            opacity:0.7;
+        }
+        #arrowDetail:hover{
+            opacity:1;
+        }
+        .otherDetails{
+            position: relative;
+        }
+        .hideAutreDetail{
+            flex: 0 0 auto;
+            width: 3%;
+        }
+        .fullPrimaryView{
+            flex: 0 0 auto;
+            width: 97%;
+        }
+
+        @media screen and (min-width: 820px){
+            ::-webkit-scrollbar {
+                width: 5px;
+                height: 5px;
+            }
+        }
+
+        @media screen and (max-width: 820px){
+            ::-webkit-scrollbar {
+                width: 0px;
+                height: 0px;
+            }
+        }
+
+        ::-webkit-scrollbar-button {
+            width: 0px;
+            height: 0px;
+        }
+
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.5);
+            border: 31px none #ffffff;
+            border-radius: 5px;
+        }
+
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0,0,0,0.7);
+        }
+
+
+        ::-webkit-scrollbar-thumb:active {
+            background: rgba(0,0,0,0.7);;
+        }
+
+
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+        }
+
+
+        ::-webkit-scrollbar-track:hover {
+            background: #f2f2f2;
+        }
+
+
+        ::-webkit-scrollbar-track:active {
+            background: #f5f5f5;
+        }
+
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+
+        .tabledata{
+            margin-bottom: 10px;
+        }
+
+        /*Fin de la personnalisation */
+
+    </style>
+
+
+</head>
+<body data-sidebar="dark" class="bg-white"   >
+
+<div id="layout-wrapper">
+    {% include 'partails/navbar.html.twig' %}
+
+    {% include 'partails/_sidebar.html.twig' %}
+
+    <div class="main-content bg-white">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <div class="">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">{% block session %}Dashboard{% endblock %}</a></li>
+                                    <li class="breadcrumb-item active">{% block LienActive %}Dashboard {% endblock %}</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                {% block body %}
+
+
+                {% endblock %}
+                {% block footer %}
+
+                    <footer class="footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <script>document.write(new Date().getFullYear())</script> © Magnificat les 4M.
+                                </div>
+                                <div class="col-sm-6">
+
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+
+                {% endblock %}
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="right-bar">
+    <div data-simplebar class="h-100">
+        <div class="rightbar-title d-flex align-items-center p-3">
+
+            <h5 class="m-0 me-2">Theme Customizer</h5>
+
+            <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                <i class="mdi mdi-close noti-icon"></i>
+            </a>
+        </div>
+
+        <!-- Settings -->
+        <hr class="m-0" />
+
+        <div class="p-4">
+            <h6 class="mb-3">Layout</h6>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout"
+                       id="layout-vertical" value="vertical">
+                <label class="form-check-label" for="layout-vertical">Vertical</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout"
+                       id="layout-horizontal" value="horizontal">
+                <label class="form-check-label" for="layout-horizontal">Horizontal</label>
+            </div>
+
+            <h6 class="mt-4 mb-3 pt-2">Layout Mode</h6>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout-mode"
+                       id="layout-mode-light" value="light">
+                <label class="form-check-label" for="layout-mode-light">Light</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout-mode"
+                       id="layout-mode-dark" value="dark">
+                <label class="form-check-label" for="layout-mode-dark">Dark</label>
+            </div>
+
+            <h6 class="mt-4 mb-3 pt-2">Layout Width</h6>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout-width"
+                       id="layout-width-fuild" value="fuild" onchange="document.body.setAttribute('data-layout-size', 'fluid')">
+                <label class="form-check-label" for="layout-width-fuild">Fluid</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout-width"
+                       id="layout-width-boxed" value="boxed" onchange="document.body.setAttribute('data-layout-size', 'boxed')">
+                <label class="form-check-label" for="layout-width-boxed">Boxed</label>
+            </div>
+
+            <h6 class="mt-4 mb-3 pt-2">Layout Position</h6>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout-position"
+                       id="layout-position-fixed" value="fixed" onchange="document.body.setAttribute('data-layout-scrollable', 'false')">
+                <label class="form-check-label" for="layout-position-fixed">Fixed</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout-position"
+                       id="layout-position-scrollable" value="scrollable" onchange="document.body.setAttribute('data-layout-scrollable', 'true')">
+                <label class="form-check-label" for="layout-position-scrollable">Scrollable</label>
+            </div>
+
+            <h6 class="mt-4 mb-3 pt-2">Topbar Color</h6>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="topbar-color"
+                       id="topbar-color-light" value="light" onchange="document.body.setAttribute('data-topbar', 'light')">
+                <label class="form-check-label" for="topbar-color-light">Light</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="topbar-color"
+                       id="topbar-color-dark" value="dark" onchange="document.body.setAttribute('data-topbar', 'dark')">
+                <label class="form-check-label" for="topbar-color-dark">Dark</label>
+            </div>
+
+            <h6 class="mt-4 mb-3 pt-2 sidebar-setting">Sidebar Size</h6>
+
+            <div class="form-check sidebar-setting">
+                <input class="form-check-input" type="radio" name="sidebar-size"
+                       id="sidebar-size-default" value="default" onchange="document.body.setAttribute('data-sidebar-size', 'lg')">
+                <label class="form-check-label" for="sidebar-size-default">Default</label>
+            </div>
+            <div class="form-check sidebar-setting">
+                <input class="form-check-input" type="radio" name="sidebar-size"
+                       id="sidebar-size-compact" value="compact" onchange="document.body.setAttribute('data-sidebar-size', 'md')">
+                <label class="form-check-label" for="sidebar-size-compact">Compact</label>
+            </div>
+            <div class="form-check sidebar-setting">
+                <input class="form-check-input" type="radio" name="sidebar-size"
+                       id="sidebar-size-small" value="small" onchange="document.body.setAttribute('data-sidebar-size', 'sm')">
+                <label class="form-check-label" for="sidebar-size-small">Small (Icon View)</label>
+            </div>
+
+            <h6 class="mt-4 mb-3 pt-2 sidebar-setting">Sidebar Color</h6>
+
+            <div class="form-check sidebar-setting">
+                <input class="form-check-input" type="radio" name="sidebar-color"
+                       id="sidebar-color-light" value="light" onchange="document.body.setAttribute('data-sidebar', 'light')">
+                <label class="form-check-label" for="sidebar-color-light">Light</label>
+            </div>
+            <div class="form-check sidebar-setting">
+                <input class="form-check-input" type="radio" name="sidebar-color"
+                       id="sidebar-color-dark" value="dark" onchange="document.body.setAttribute('data-sidebar', 'dark')">
+                <label class="form-check-label" for="sidebar-color-dark">Dark</label>
+            </div>
+            <div class="form-check sidebar-setting">
+                <input class="form-check-input" type="radio" name="sidebar-color"
+                       id="sidebar-color-brand" value="brand" onchange="document.body.setAttribute('data-sidebar', 'brand')">
+                <label class="form-check-label" for="sidebar-color-brand">Brand</label>
+            </div>
+
+            <h6 class="mt-4 mb-3 pt-2">Direction</h6>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout-direction"
+                       id="layout-direction-ltr" value="ltr">
+                <label class="form-check-label" for="layout-direction-ltr">LTR</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="layout-direction"
+                       id="layout-direction-rtl" value="rtl">
+                <label class="form-check-label" for="layout-direction-rtl">RTL</label>
+            </div>
+
+        </div>
+
+    </div> <!-- end slimscroll-menu-->
+</div>
+
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>
+
+<style>
+    @media (max-width: 540px) {
+        .custom-card {
+            max-width: 230px !important;                    /* Définir d'autres styles personnalisés pour la carte sur les PC si nécessaire */
+        }
+        #center-promotion{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .loader {
+        border: 4px solid #f3f3f3; /* Couleur de la bordure */
+        border-top: 4px solid #3498db; /* Couleur de la bordure supérieure */
+        border-radius: 50%; /* Forme du loader (cercle) */
+        width: 40px; /* Largeur du loader */
+        height: 40px; /* Hauteur du loader */
+        animation: spin 1s linear infinite; /* Animation de rotation */
+        margin: 0 auto; /* Centre le loader horizontalement */
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); } /* Rotation initiale */
+        100% { transform: rotate(360deg); } /* Rotation complète */
+    }
+</style>
+</body>
+
+
+
+
+<script src="{{ asset('assetss/libs/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('assetss/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assetss/libs/metismenu/metisMenu.min.js') }}"></script>
+<script src="{{ asset('assetss/libs/simplebar/simplebar.min.js') }}"></script>
+<script src="{{ asset('assetss/libs/node-waves/waves.min.js') }}"></script>
+<script src="{{ asset('assetss/libs/feather-icons/feather.min.js') }}"></script>
+<!-- pace js -->
+<script src="{{ asset('assetss/libs/pace-js/pace.min.js') }}"></script>
+
+<!-- apexcharts -->
+<script src="{{ asset('assetss/libs/apexcharts/apexcharts.min.js') }}"></script>
+
+<!-- Plugins js-->
+<script src="{{ asset('assetss/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+<script src="{{ asset('assetss/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js') }}"></script>
+<!-- dashboard init -->
+<script src="{{ asset('assetss/js/pages/dashboard.init.js') }}"></script>
+
+
+<script src="{{ asset('assetss/js/app.js') }}"></script>
+{{ encore_entry_script_tags('app') }}
+
+
+
+{% block javascripts %}{% endblock %}
+
+</html>

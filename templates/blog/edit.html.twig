@@ -1,0 +1,10 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Edit Blog{% endblock %}
+
+{% block body %}
+    <h4>Edit Blog</h4>
+
+    {{ include('blog/_form.html.twig', {'button_label': 'Update'}) }}
+
+{% endblock %}

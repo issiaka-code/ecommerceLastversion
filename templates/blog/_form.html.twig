@@ -1,0 +1,8 @@
+{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+    {{ form_widget(form) }}
+    <div>
+        <label for=""> Ficher </label>
+        <input type="file" name="ficherBlog" class="form-control" >
+    </div>
+    <button class="btn btn-primary mt-2 ">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

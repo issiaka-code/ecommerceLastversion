@@ -1,0 +1,168 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}New Produit{% endblock %}
+
+{% block body %}
+    <style>
+        #preview-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .preview-item {
+            margin: 10px;
+            position: relative;
+        }
+
+        .delete-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            background-color: #ff0000;
+            color: #ffffff;
+            border: none;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        .scrollable-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .scrollable-list::-webkit-scrollbar {
+            width: 5px; /* Largeur de la barre de défilement */
+        }
+
+        /* Styles pour les navigateurs basés sur WebKit (Chrome, Safari) */
+        .scrollable-list::-webkit-scrollbar-thumb {
+            background-color: #0f306d; /* Couleur de la barre de défilement */
+        }
+
+        /* Styles pour Firefox */
+        .scrollable-list::-webkit-scrollbar-track {
+            background-color: transparent; /* Couleur de fond de la barre de défilement */
+        }
+
+        /* Styles pour Firefox */
+        .scrollable-list::-webkit-scrollbar-track-piece {
+            background-color: #f1f1f1; /* Couleur de fond de la piste de défilement */
+        }
+
+        video, img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+    </style>
+    <div class="row" >
+        <div class="col-md-8" >
+            <div class="card">
+                <div class="card-body p-4">
+                    <h4>Modifier produit</h4>
+
+                    {{ include('gestion_produit/_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4">
+                <div class="card-title" > Image principale </div>
+                <div class="card-body p-4">
+                    <div id="imagePreview"><img class="card-img-top img-fluid"  height="200" src="{{asset('produit/')}}{{produit.ficher}}" alt="Card image cap" > </div>
+                </div>
+            </div>
+            <div class="card p-4">
+                <div class="card-title" > Détails produit </div>
+                <div class="card-body" style="display: flex; justify-content: center !important;">
+
+                    <div class="scrollable-list" id="preview-container" >
+                        {% for detail in details  %}
+
+                            {% if detail.isVideo  %}
+
+                             <div class="mt-2">
+                                 <video   controls style="height:300px !important " >
+                                     <source src="{{asset('produit/')}}{{detail.ficher}}">
+                                 </video>
+                             </div>
+                            {% else %}
+                               <div class="mt-2">
+                                   <img class="card-img-top img-fluid"  height="200" src="{{asset('produit/')}}{{detail.ficher}}" alt="Card image cap" >
+                               </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('fileInput2').addEventListener('change', handleFileSelect);
+
+        function handleFileSelect(event) {
+            const files = event.target.files;
+
+            // Effacez le contenu précédent du conteneur de prévisualisation
+            const previewContainer = document.getElementById('preview-container');
+            previewContainer.innerHTML = '';
+
+            if (!files.length) {
+                return;
+            }
+
+            for (const file of files) {
+                const previewItem = document.createElement('div');
+                previewItem.classList.add('preview-item');
+
+                if (file.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = URL.createObjectURL(file);
+                    previewItem.appendChild(img);
+                } else if (file.type.startsWith('video/')) {
+                    const video = document.createElement('video');
+                    video.controls = true;
+                    const source = document.createElement('source');
+                    source.src = URL.createObjectURL(file);
+                    video.appendChild(source);
+                    previewItem.appendChild(video);
+                }
+
+                const deleteButton = document.createElement('button');
+                deleteButton.classList.add('delete-button');
+                deleteButton.innerHTML = 'X';
+                deleteButton.addEventListener('click', () => {
+                    // Ajoutez le nom du fichier supprimé au champ caché
+                    const removedFilesInput = document.getElementById('removedFiles');
+                    const removedFiles = removedFilesInput.value.split(',');
+                    removedFiles.push(file.name);
+                    removedFilesInput.value = removedFiles.join(',');
+
+                    // Retirez l'élément de la prévisualisation
+                    previewContainer.removeChild(previewItem);
+                });
+
+                previewItem.appendChild(deleteButton);
+                previewContainer.appendChild(previewItem);
+            }
+        }
+    </script>
+
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = ''; // Effacez le contenu précédent
+
+            const files = input.files;
+
+            if (files.length > 0) {
+                const image = document.createElement('img');
+                image.src = URL.createObjectURL(files[0]);
+                image.style.maxWidth = '100%';
+                image.style.maxHeight = '200px'; // Ajustez la hauteur selon vos besoins
+                preview.appendChild(image);
+            }
+        }
+    </script>
+{% endblock %}

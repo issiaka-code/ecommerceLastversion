@@ -1,0 +1,51 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Blog index{% endblock %}
+
+{% block body %}
+   <div>
+       <a class="btn btn-primary" href="{{ path('app_blog_new') }}">Ajouter blog</a>
+   </div>
+    <h4>Liste des blogs </h4>
+
+        {% for blog in blogs %}
+                    {% set words = blog.description|split(' ') %}
+                    {% set limitedWords = words|slice(0, 10)|join(' ') %}
+                    {% if blog.isVideo %}
+                        <div class="col-md-4 col-xl-2 " >
+                            <div class="card">
+                                <video   controls style="height:300px !important " >
+                                    <source src="{{asset('blog/')}}{{blog.ficher}}">
+                                </video>
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ blog.nom }}</h4>
+                                    <p class="card-text">{{ limitedWords }}...</p>
+                                    <div class="d-flex flex-row" >
+                                        {{ include('blog/_delete_form.html.twig') }}
+                                        <a href="{{ path('app_blog_edit', {'id': blog.id}) }}" class="btn btn-sm btn-info ms-2 waves-effect waves-light"><i class="fas fa-pen" ></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-md-4 col-xl-2 "  >
+                            <!-- Simple card -->
+                            <div class="card">
+                                <img class="card-img-top img-fluid"  height="200" src="{{asset('blog/')}}{{blog.ficher}}" alt="Card image cap" >
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ blog.nom }}</h4>
+                                    <p class="card-text">{{ limitedWords }}...</p>
+                                    <div class="d-flex flex-row" >
+                                        {{ include('blog/_delete_form.html.twig') }}
+                                        <a href="{{ path('app_blog_edit', {'id': blog.id}) }}" class="btn btn-sm btn-info ms-2 waves-effect waves-light"><i class="fas fa-pen" ></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+        {% else %}
+            <p> Aucune donnée trouver</p>
+        {% endfor %}
+
+{% endblock %}

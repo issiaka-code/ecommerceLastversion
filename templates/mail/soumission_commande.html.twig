@@ -1,0 +1,184 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}</title>
+    <style>
+     table{
+  border-collapse: collapse
+}
+
+.styled-table th, .styled-table td{
+  border: 1px solid #33FFF9;
+  padding: 10px;
+}
+    </style>
+</head>
+<body>
+
+<table class="table tab0le-borderless styled-table " style="width: 100%">
+    <tbody>
+    <tr style="padding-left:  0!important;margin: 0!important;">
+      <td style="width: 100%; text-align: right; margin-top: 30px">
+            <div>
+                <h4>Facture de commande</h4>
+            </div>
+        </td>
+        <td class="text-left" style="width: 40%;">
+                <img alt="" style="width: 200px" src="{{ absolute_url(asset('logo1.png')) }}">
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+<div class="box-head">
+                            <h3 class="head-title">Informations personnelles</h3>
+ </div>
+
+<table class="table tab0le-borderless styled-table " style="width: 100%;margin-top: 30px">
+    <tbody>
+    <tr style="padding-left:  0!important;margin: 0!important;">
+      <td style="width: 100%; text-align: left; margin-top: 30px">
+             Nom  :
+        </td>
+        <td class="text-left" style="width: 40%;">
+             {{personne.nom}}
+        </td>
+
+    </tr>
+    <tr style="padding-left:  0!important;margin: 0!important;">
+      <td style="width: 100%; text-align: left; margin-top: 30px">
+            prenom :
+        </td>
+        <td class="text-left" style="width: 40%;">
+            {{personne.prenom }}
+        </td>
+
+    </tr>
+    <tr style="padding-left:  0!important;margin: 0!important;">
+      <td style="width: 100%; text-align:left; margin-top: 30px">
+            Tel :
+        </td>
+        <td class="text-left" style="width: 40%;">
+            {{personne.phone}}
+        </td>
+
+    </tr>
+    <tr style="padding-left:  0!important;margin: 0!important;">
+      <td style="width: 100%; text-align: left; margin-top: 30px">
+            Email :
+        </td>
+        <td class="text-left" style="width: 40%;">
+            {{personne.email}}
+        </td>
+
+
+    </tr>
+    <tr style="padding-left:  0!important;margin: 0!important;">
+      <td style="width: 100%; text-align: left; margin-top: 30px">
+            Pays :
+        </td>
+        <td class="text-left" style="width: 40%;">
+            {{personne.pays}}
+        </td>
+
+    </tr>
+    <tr style="padding-left:  0!important;margin: 0!important;">
+      <td style="width: 100%; text-align: left; margin-top: 30px">
+            Adresse :
+        </td>
+        <td class="text-left" style="width: 40%;">
+           {{ personne.adresse}}
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+
+<div class="space-medium">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="box">
+                        <div class="box-head">
+                            <h3 class="head-title">Produit ({{panier |length }})</h3>
+                        </div>
+                        <!-- cart-table-section -->
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <div class="cart">
+                                    <table class="styled-table">
+                                        <thead style="background-color: #ff7900;color:#ffff ">
+                                            <tr>
+                                                <th>
+                                                    <span>Nom produit</span></th>
+                                                <th>
+                                                    <span>Prix</span></th>
+                                                <th>
+                                                    <span>Quantité</span></th>
+                                                <th>
+                                                    <span>Total</span></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% set count = 0 %}
+                                        {% set montantTotale = 0 %}
+                                        {% if panier|length == 0 %}
+
+                                        {% else %}
+
+                                        {% for item in panier %}
+                                          	{% set image = item.image | split(";") %}
+                                              {% set prix_totale = ( item.prix |strings_float) * (item.quantite|strings_float) %}
+                                              {% set  montantTotale = montantTotale + prix_totale  %}
+                                            <tr class="produit{{item.id}}"  >
+                                                <td style="border: 1px solid #33FFF9;margin:0;" ><img src="{{absolute_url(asset('produit/'))}}{{image[0]}}"  alt="" style="height:50px !important" >
+                                                    <div>{{item.nom}}</div>
+                                                </td>
+                                                <td style="text-align:center; " >€<span class="prix{{item.id}}">{{item.prix}}</span></td>
+                                                <td style="text-align:center; " >
+                                                    {{item.quantite}}
+                                                </td>
+                                                <td style="text-align:center;" >€<span class="totale_prix_produit{{item.id}} prix_totale_par_produit" >{{prix_totale}}</span></td>
+
+                                            </tr>
+                                           {% set count=count+1 %}
+                                        {% endfor %}
+
+                                        {% endif %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th  class="text-center" >Total :</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>
+                                                    €
+                                                    {{montantTotale}}
+                                                </th>
+
+                                            </tr>
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+                                <!-- /.cart-table-section -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- cart-total -->
+            </div>
+            <!-- /.cart-total -->
+        </div>
+    </div>
+
+</table>
+
+</body>
+
+</html>

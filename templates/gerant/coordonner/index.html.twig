@@ -1,0 +1,166 @@
+{% extends 'espaceClientBase.html.twig' %}
+{% block body %}
+
+	<main
+		class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+		<!-- Navbar -->
+		<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+			<div class="container-fluid py-1 px-3">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+						<li class="breadcrumb-item text-sm">
+							<a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+						</li>
+						<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+					</ol>
+					<h6 class="font-weight-bolder mb-0" style="color:brown"></h6>
+				</nav>
+				<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+
+					{% include 'espace_client/partail_/menu_haut.html.twig' %}
+
+				</div>
+			</div>
+		</nav>
+		<!-- End Navbar -->
+		<div class="container-fluid py-4">
+
+			<div class="row mb-4">
+				{% include 'espace_client/partail_/symthese.html.twig' %}
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="card mb-4">
+						<div class="card-header pb-0">
+							<h6>Compte</h6>
+						</div>
+						<div class="card-body px-0 pt-0 pb-2">
+							<div class="table-responsive p-0">
+								<table class="table align-items-center mb-0">
+									<thead>
+										<tr>
+
+											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
+											<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Adresse</th>
+											<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pays</th>
+											<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Destinataire</th>
+
+											<th class="text-secondary opacity-7"></th>
+										</tr>
+									</thead>
+									<tbody>
+
+
+											<tr>
+
+												<td>
+													<p class="text-xs font-weight-bold mb-0">
+													   Virrement bancaire
+													</p>
+
+												</td>
+
+												<td class="align-middle text-center">
+
+
+														<span class="text-secondary text-xs font-weight-bold">{{rib[0].adresse}}</span>
+
+												</td>
+												<td class="align-middle text-center">
+													<span class="text-secondary text-xs font-weight-bold">
+
+                                                    {{rib[0].desti}}
+													</span>
+												</td>
+												<td class="align-middle text-center">
+													<span class="text-secondary text-xs font-weight-bold">
+														{{rib[0].bic}}
+													</span>
+												</td>
+
+
+												<td class="">
+
+													<a href="{{ path('app_modif_compte')}}" class="badge badge-sm bg-gradient-success text-xs" data-toggle="tooltip" data-original-title="Edit user">
+														modifier
+													</a>
+												</td>
+
+											</tr>
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+            <div class="row">
+				<div class="col-12">
+					<div class="card mb-4">
+						<div class="card-header pb-0">
+							<h6>Crypto</h6>
+						</div>
+						<div class="card-body px-0 pt-0 pb-2">
+							<div class="table-responsive p-0">
+								<table class="table align-items-center mb-0">
+									<thead>
+										<tr>
+											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ID</th>
+											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">TYPE</th>
+											<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ADRESSE</th>
+
+										</tr>
+									</thead>
+									<tbody>
+
+											{% for item in crypto %}
+											<tr>
+
+												<td>
+													<p class="text-xs font-weight-bold mb-0">
+													   {{item.id}}
+													</p>
+
+												</td>
+
+												<td class="align-middle text-center">
+
+
+														<span class="text-secondary text-xs font-weight-bold">{{item.type}}</span>
+
+												</td>
+												<td class="align-middle text-center">
+													<span class="text-secondary text-xs font-weight-bold">
+
+                                                   {{item.adresse}}
+													</span>
+												</td>
+
+
+
+												<td class="">
+
+													<a href="{{ path('app_modif_crypto',{id:item.id})}}" class="badge badge-sm bg-gradient-success text-xs" data-toggle="tooltip" data-original-title="Edit user">
+														modifier
+													</a>
+												</td>
+
+											</tr>
+
+                                       {% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</main>
+
+{% endblock %}
